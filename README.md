@@ -127,6 +127,12 @@ MVPでは **外部サイトから自動取得はせず**、ユーザーが **事
 
 ---
 
+## 画面遷移図
+
+Figma：[https://www.figma.com/online-whiteboard/create-diagram/499ae09d-839f-4be5-bb39-be8cfb8dde51](https://www.figma.com/online-whiteboard/create-diagram/499ae09d-839f-4be5-bb39-be8cfb8dde51)
+
+---
+
 ## 補足（レビュー観点で意識していること）
 - ターゲットと利用シーンを「旅行先のお土産選び」に限定し、企画の独自性を担保  
 - MVP段階でスコープを抑え、Auth/CRUD/独自ロジックが一通り動く状態を優先  
