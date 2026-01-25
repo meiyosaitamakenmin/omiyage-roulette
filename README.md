@@ -133,6 +133,14 @@ Figma：[https://www.figma.com/design/Est9XHNgsoyyRZHHclf0lO/%E7%94%BB%E9%9D%A2%
 
 ---
 
+## ER図
+
+![ER図](ER.png)
+
+リンク：https://dbdiagram.io/d/6975c767bd82f5fce28441b6
+
+---
+
 ## 補足（レビュー観点で意識していること）
 - ターゲットと利用シーンを「旅行先のお土産選び」に限定し、企画の独自性を担保  
 - MVP段階でスコープを抑え、Auth/CRUD/独自ロジックが一通り動く状態を優先  
