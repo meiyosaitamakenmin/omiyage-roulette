@@ -7,7 +7,10 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins ENV.fetch('FRONTEND_URL', 'http://localhost:3000')
+    # 複数のオリジンを許可（カンマ区切りで指定可能）
+    # 環境変数が設定されていない場合は、開発環境と本番環境の両方を許可
+    frontend_urls = ENV.fetch('FRONTEND_URL', 'http://localhost:3000,https://omiyage-roulette-psi.vercel.app')
+    origins frontend_urls.split(',').map(&:strip)
 
     resource '*',
       headers: :any,
