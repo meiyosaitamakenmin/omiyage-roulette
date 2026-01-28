@@ -8,7 +8,7 @@ module Api
         @user = login(params[:email], params[:password])
 
         if @user
-          render json: UserBlueprint.render_as_hash(@user), status: :ok
+          render json: { user: UserBlueprint.render_as_hash(@user) }, status: :ok
         else
           render json: { errors: ['メールアドレスまたはパスワードが正しくありません'] }, status: :unauthorized
         end
@@ -22,7 +22,7 @@ module Api
 
       # GET /api/v1/me
       def me
-        render json: UserBlueprint.render_as_hash(current_user), status: :ok
+        render json: { user: UserBlueprint.render_as_hash(current_user) }, status: :ok
       end
     end
   end

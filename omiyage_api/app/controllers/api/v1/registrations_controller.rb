@@ -9,7 +9,7 @@ module Api
 
         if @user.save
           auto_login(@user)
-          render json: UserBlueprint.render_as_hash(@user), status: :created
+          render json: { user: UserBlueprint.render_as_hash(@user) }, status: :created
         else
           render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
         end

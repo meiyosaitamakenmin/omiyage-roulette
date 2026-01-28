@@ -42,7 +42,11 @@ module OmiyageApi
     config.api_only = true
 
     # セッション設定（Cookie認証用）
-    config.session_store :cookie_store, key: '_omiyage_api_session'
+    config.session_store :cookie_store,
+      key: '_omiyage_api_session',
+      domain: 'localhost', # localhost の全ポートで共有
+      same_site: :lax, # クロスオリジンでもCookieを送信可能に
+      secure: false # 開発環境ではHTTPでも動作（本番環境ではtrueに設定すること）
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use config.session_store, config.session_options
   end
