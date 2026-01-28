@@ -7,14 +7,24 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    # 複数のオリジンを許可（カンマ区切りで指定可能）
-    # 環境変数が設定されていない場合は、開発環境と本番環境の両方を許可
-    frontend_urls = ENV.fetch('FRONTEND_URL', 'http://localhost:3000,https://omiyage-roulette-psi.vercel.app')
-    origins frontend_urls.split(',').map(&:strip)
+    # 環境変数が設定されている場合はそれを使用、なければ環境に応じたデフォルト値を使用
+    frontend_url = ENV['FRONTEND_URL']
+    
+    if frontend_url && !frontend_url.empty?
+      # 環境変数が設定されている場合、カンマ区切りで分割
+      origins frontend_url.split(',').map(&:strip)
+    elsif Rails.env.production?
+      # 本番環境: Vercelのオリジンを許可
+      origins 'https://omiyage-roulette-psi.vercel.app'
+    else
+      # 開発環境・テスト環境: localhostを許可
+      origins 'http://localhost:3000'
+    end
 
     resource '*',
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      credentials: true
+      credentials: true,
+      expose: ['Set-Cookie']
   end
 end
