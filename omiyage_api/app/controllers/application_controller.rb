@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include Sorcery::Controller
   include ActionController::Cookies
   before_action :require_login
 
