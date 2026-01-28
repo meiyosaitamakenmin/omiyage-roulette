@@ -86,10 +86,9 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   # 本番環境用のCookie設定（クロスオリジン対応）
-  # domain を nil にすることで、リクエスト元のドメインに応じて適切に設定される
   config.session_store :cookie_store,
     key: '_omiyage_api_session',
-    domain: nil, # クロスオリジンの場合は nil にすることで適切に動作
     same_site: :none, # クロスオリジンでは :none が必要
     secure: true # HTTPS必須
+  config.middleware.use config.session_store, config.session_options
 end
