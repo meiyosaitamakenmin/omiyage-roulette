@@ -6,15 +6,23 @@ export const useApi = () => {
     path: string,
     options: RequestInit = {}
   ): Promise<T> => {
-    const response = await $fetch<T>(`${baseURL}${path}`, {
-      ...options,
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
-    })
-    return response
+    try {
+      const response = await $fetch<T>(`${baseURL}${path}`, {
+        ...options,
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers,
+        },
+      })
+      return response
+    } catch (error: any) {
+      // エラーレスポンスのボディを適切に取得して再スロー
+      if (error.data) {
+        throw { ...error, data: error.data }
+      }
+      throw error
+    }
   }
 
   return {
