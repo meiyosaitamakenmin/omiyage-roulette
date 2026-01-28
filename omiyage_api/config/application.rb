@@ -42,6 +42,7 @@ module OmiyageApi
     config.api_only = true
 
     # セッション設定（Cookie認証用）
+    # 本番環境では production.rb で上書きされる
     config.session_store :cookie_store,
       key: '_omiyage_api_session',
       domain: 'localhost', # localhost の全ポートで共有
